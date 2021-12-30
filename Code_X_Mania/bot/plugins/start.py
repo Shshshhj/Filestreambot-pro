@@ -57,135 +57,15 @@ async def follow_user(b,m):
                     parse_mode="HTML",
                     disable_web_page_preview=True)
 
-@StreamBot.on_message((filters.command("/start") | filters.regex('start⚡gwgwgw')) & filters.private & ~filters.edited)
-async def start(b, m):
-    if not await db.is_user_exist(m.from_user.id):
-        await db.add_user(m.from_user.id)
-        await b.send_message(
-            Var.BIN_CHANNEL,
-            f"**Nᴇᴡ Usᴇʀ Jᴏɪɴᴇᴅ:** \n\n__Mʏ Nᴇᴡ Fʀɪᴇɴᴅ__ [{m.from_user.first_name}](tg://user?id={m.from_user.id}) __Sᴛᴀʀᴛᴇᴅ Yᴏᴜʀ Bᴏᴛ !!__"
-        )
-    usr_cmd = m.text.split("_")[-1]
-    if usr_cmd == "start" or "/start":
-        if Var.UPDATES_CHANNEL != "None":
-            try:
-                user = await b.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-                if user.status == "kicked":
-                    await b.send_message(
-                        chat_id=m.chat.id,
-                        text="error",
-                        parse_mode="markdown",
-                        disable_web_page_preview=True
-                    )
-                    return
-            except UserNotParticipant:
-                 await StreamBot.send_message(
-                    chat_id=m.chat.id,
-                    text="sedlyf",
-                    parse_mode="markdown"
-                )
-                 return
-            except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="error",
-                    parse_mode="HTML",
-                    disable_web_page_preview=True)
-                return
-        await StreamBot.send_message(
-            chat_id=m.chat.id,
-            text =""" hi, 
-Send me any file and see the magic!""",
-            parse_mode="html",
-            reply_markup=buttonz)
+@StreamBot.on_message(filters.command(['start', 'help']))
+async def start(_, m: Message):
+    await m.reply(f'Hi {m.from_user.mention(style="md")}, Send me any media and take your link.', quote=True)
                                                                                        
                                                                                        
                                                                             
-    else:
-        if Var.UPDATES_CHANNEL != "None":
-            try:
-                user = await b.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-                if user.status == "kicked":
-                    await b.send_message(
-                        chat_id=m.chat.id,
-                        text="**Sᴏʀʀʏ Sɪʀ, Yᴏᴜ ᴀʀᴇ Bᴀɴɴᴇᴅ ᴛᴏ ᴜsᴇ ᴍᴇ. Qᴜɪᴄᴋʟʏ ᴄᴏɴᴛᴀᴄᴛ** @adarsh_status_bot",
-                        parse_mode="markdown",
-                        disable_web_page_preview=True
-                    )
-                    return
-            except UserNotParticipant:
-                await StreamBot.send_photo(
-                    chat_id=m.chat.id,
-                    photo="https://i.ibb.co/ys3Tgpk/mtzijuhd-0.png",
-                    caption="**Pʟᴇᴀsᴇ Jᴏɪɴ  Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ᴛᴏ ᴜsᴇ ᴛʜɪs Bᴏᴛ**!\n\n**Dᴜᴇ ᴛᴏ Oᴠᴇʀʟᴏᴀᴅ, Oɴʟʏ Cʜᴀɴɴᴇʟ Sᴜʙsᴄʀɪʙᴇʀs ᴄᴀɴ ᴜsᴇ ᴛʜᴇ Bᴏᴛ**!",
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                            ],
-                            [
-                                InlineKeyboardButton("🔄 Refresh / Try Again",
-                                                     url=f"https://t.me/{Var.APP_NAME}.herokuapp.com/{usr_cmd}") # Chnage ur app name
-                            ]
-                        ]
-                    ),
-                    parse_mode="markdown"
-                )
-                return
-            except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="error",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True)
-                return
-            
-    
-
-    
-
     
 
 
-        get_msg = await b.get_messages(chat_id=Var.BIN_CHANNEL, message_ids=int(usr_cmd))
-
-        file_size = None
-        if get_msg.video:
-            file_size = f"{humanbytes(get_msg.video.file_size)}"
-        elif get_msg.document:
-            file_size = f"{humanbytes(get_msg.document.file_size)}"
-        elif get_msg.audio:
-            file_size = f"{humanbytes(get_msg.audio.file_size)}"
-            
-        elif get_msg.photo:
-            file_size=f"{get_msg.photo.file_size}"
-
-        file_name = None
-        if get_msg.video:
-            file_name = f"{get_msg.video.file_name}"
-        elif get_msg.document:
-            file_name = f"{get_msg.document.file_name}"
-        elif get_msg.audio:
-            file_name = f"{get_msg.audio.file_name}"
-        elif get_msg.photo:
-            file_name=f"{get_msg.photo.file_name}"
-
-        stream_link = Var.URL + 'watch/' + str(log_msg.message_id) + str(file_name) 
-        
-        online_link = Var.URL + 'download/' + str(log_msg.message_id) 
-       
-
-        msg_text ="""
-<i>{}</i>
-
-<i>{}</i>
-
-"""
-
-        await m.reply_text(
-            text=msg_text.format(file_name, online_link),
-            parse_mode="HTML",
-        )
 
 
 @StreamBot.on_message(filters.regex('hehhfghjihvlp📚') & filters.private & ~filters.edited)
