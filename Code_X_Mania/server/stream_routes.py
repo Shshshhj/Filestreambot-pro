@@ -38,8 +38,8 @@ async def stream_handler(request):
 
 
  
-@routes.get("/download/{message_id}")
-@routes.get("/{message_id}")
+@routes.get(r"/download/{message_id:\S+}")
+@routes.get(r"/{message_id:\S+}")
 async def old_stream_handler(request):
     try:
         message_id = int(request.match_info['message_id'])
