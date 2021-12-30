@@ -27,7 +27,7 @@ async def root_route_handler(request):
 
 
 @routes.get(r"/{message_id:\S+}")
-async def stream_handler(request):
+async def old_stream_handler(request):
     try:
         message_id = request.match_info['message_id']
         message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
