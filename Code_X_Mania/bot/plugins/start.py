@@ -58,14 +58,11 @@ async def follow_user(b,m):
                     disable_web_page_preview=True)
 
 @StreamBot.on_message(filters.command(['start', 'help']))
-async def start(_, m: Message):
+async def start(_, m: message):
     await m.reply(f'Hi {m.from_user.mention(style="md")}, Send me any media and take your link.', quote=True)
                                                                                        
                                                                                        
                                                                             
-    
-
-
 
 
 @StreamBot.on_message(filters.regex('hehhfghjihvlp📚') & filters.private & ~filters.edited)
