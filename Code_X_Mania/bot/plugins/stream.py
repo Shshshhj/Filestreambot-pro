@@ -7,6 +7,7 @@ from Code_X_Mania.bot import StreamBot
 from Code_X_Mania.utils.database import Database
 from Code_X_Mania.utils.human_readable import humanbytes
 from Code_X_Mania.vars import Var
+from urllib.parse import quote_plus
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -111,7 +112,7 @@ async def private_receive_handler(c: Client, m: Message):
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = Var.URL + 'watch/' + str(log_msg.message_id) 
         
-        online_link = Var.URL + 'download/'+ str(log_msg.message_id) + str(file_name)
+        online_link = Var.URL + 'download/'+ str(log_msg.message_id) + f'/{quote_plus(file_name)}'
        
         
         
