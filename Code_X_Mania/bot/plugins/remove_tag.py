@@ -2,7 +2,6 @@
 from pyrogram.errors import RPCError
 from pyrogram import filters
 from Code_X_Mania.bot import StreamBot
-from Code_X_Mania.bot.plugins.stream import channel_receive_handler
 
 @StreamBot.on_message(filters.channel & (filters.forwarded | filters.via_bot))
 async def forward_channel_handler(client, message):
@@ -14,4 +13,3 @@ async def forward_channel_handler(client, message):
         return
     except:
         return
-    await channel_receive_handler(client, jv_message)
