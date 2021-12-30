@@ -1,5 +1,5 @@
 from pyrogram import filters, emoji
-from WebStreamer.bot import StreamBot
+from Code_X_Mania.bot import StreamBot
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 
