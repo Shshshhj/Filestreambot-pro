@@ -118,6 +118,7 @@ async def private_receive_handler(c: Client, m: Message):
         
 
         msg_text ="""
+{} 
 <b>Direct download link!</b> : {} 
 
 <b>Online Streaming link</b> : {}
@@ -127,7 +128,7 @@ If you like this bot. Please share😊.
 
         await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Stream ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
         await m.reply_text(
-            text=msg_text.format(file_name, online link, stream_link),
+            text=msg_text.format(file_name, online_link, stream_link),
             parse_mode="HTML", 
             quote=True,
             disable_web_page_preview=True,
