@@ -95,7 +95,7 @@ async def private_receive_handler(c: Client, m: Message):
         elif m.audio:
             file_size = f"{humanbytes(m.audio.file_size)}"
         elif m.photo:
-            file_size=f"{humanbytes(m.photo.file_size)}"
+            file_size= f"{humanbytes(m.photo.file_size)}"
 
         file_name = None
         if m.video:
@@ -105,7 +105,7 @@ async def private_receive_handler(c: Client, m: Message):
         elif m.audio:
             file_name = f"{m.audio.file_name}"
         elif m.photo:
-            file_name=f"{m.photo.file_name}"
+            file_name= f"{m.photo.message_id}"
 
             
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
