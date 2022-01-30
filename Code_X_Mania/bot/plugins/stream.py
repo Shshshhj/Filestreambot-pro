@@ -104,10 +104,9 @@ async def private_receive_handler(c: Client, m: Message):
             file_name = f"{m.document.file_name}"
         elif m.audio:
             file_name = f"{m.audio.file_name}"
-        """
         elif m.photo:
             file_name=f"{m.photo.file_name}"
-        """
+
             
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = Var.URL + 'stream/' + str(log_msg.message_id) + f'/{quote_plus(file_name)}'
