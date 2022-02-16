@@ -13,7 +13,7 @@ async def stats(bot, update):
   free = get_readable_file_size(free)
   sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
   recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
-  users = psutil.net_connections
+  users = psutil.users()
   cpuUsage = psutil.cpu_percent(interval=0.5)
   memory = psutil.virtual_memory().percent
   disk = psutil.disk_usage('/').percent
@@ -25,6 +25,6 @@ async def stats(bot, update):
             f'<b>Down:</b> {recv}\n\n' \
             f'<b>CPU:</b> {cpuUsage}% ' \
             f'<b>RAM:</b> {memory}% ' \
-            f'<b>Disk:</b> {disk}%' \
-            f'<b>Users:</b> {users}%'
+            f'<b>Disk:</b> {disk}%\n' \
+            f'<b>Users:</b> {users}'
   await update.reply_text(botstats)
