@@ -13,7 +13,7 @@ async def stats(bot, update):
   free = get_readable_file_size(free)
   sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
   recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
-  users = psutil.net_io_counters().read_count
+  users = psutil.net_connections
   cpuUsage = psutil.cpu_percent(interval=0.5)
   memory = psutil.virtual_memory().percent
   disk = psutil.disk_usage('/').percent
